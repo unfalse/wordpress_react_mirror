@@ -1,5 +1,7 @@
 Wordpress mirror with REST API and React
 
+You can see it in action [here](http://unfalsecoding.net/rrm)
+
 Below is the Create React App readme.
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
