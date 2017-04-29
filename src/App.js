@@ -1,19 +1,9 @@
 import React, { Component } from 'react';
 import Home from './Home';
 import Post from './Post';
+import LeftMenuBlock from './LeftMenuBlock';
 import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
 import './App.css';
-
-/*
- <Link to={`/posts/${p.id}`}>
- {p.title}
- </Link>
-
-
- render={({ match }) =>
- <Post postData={allPosts.find(p => p.id === match.params.postId )}/>
- }
- */
 
 class App extends Component {
     constructor(props) {
@@ -141,46 +131,4 @@ class App extends Component {
   }
 }
 
-/*
-
-
-
- <div>
- <div className="left-menu-title">Посты</div>
- {// eslint-disable-next-line
- posts.filter(p => p.postType=="post").map(p =>
- <div key={p.id} className="post-link">
- <Link to={`/posts/${p.id}`}>
- {p.title}
- </Link>
- </div>
- )
- }
- </div>
-
- */
-
-const LeftMenuBlock = ({menuData}) => {
-    const { blockTitle, blockType, posts } = menuData;
-    console.log('LeftMenuBlock!');
-    const output = <div>
-        <div className="left-menu-title">{blockTitle}</div>
-        {// eslint-disable-next-line
-            posts.filter(p => p.postType==blockType).map(p =>
-                <div key={p.id} className="post-link">
-                    {p.title}
-                </div>
-            )
-        }
-    </div>;
-    return output;
-}
-
 export default App;
-/*
- <div dangerouslySetInnerHTML={{ __html: p.content }} />
-
- <Link to={`/posts/${p.id}`}>
- {p.title}
- </Link>
- */
