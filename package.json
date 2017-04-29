@@ -2,7 +2,7 @@
   "name": "des-wp-rest-mirror",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://unfalsecoding.net/r",
+  "homepage": "http://unfalsecoding.net/rrm",
   "dependencies": {
     "bootstrap": "^3.3.7",
     "jquery": "^3.2.1",

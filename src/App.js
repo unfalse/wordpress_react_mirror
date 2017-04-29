@@ -1,65 +1,8 @@
 import React, { Component } from 'react';
-import Preview from './Preview';
+import Home from './Home';
+import Post from './Post';
 import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
 import './App.css';
-
-const Post = ({postData}) => {
-    const { content, title, date } = postData;
-    const postDate = new Date(date);
-    console.log(date);
-    console.log(postData);
-    return <div>
-        <h2>{title}</h2>
-        <div><strong>{postDate.toLocaleString()}</strong></div>
-        <p dangerouslySetInnerHTML={{ __html: content }}></p>
-    </div>
-}
-
-class Home extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            showMainList: true
-        };
-    }
-
-    render(){
-        const { postsContents=[], pagesContents=[] } = this.props.posts;
-//        const allPosts = postsContents.concat(pagesContents);
-        let mainList = <div>
-                <i>Страницы</i>
-                {// eslint-disable-next-line
-                    pagesContents.map(p =>
-                        <div key={p.id}>
-                            <Preview
-                                text={p.content}
-                                title={p.title}
-                                date={new Date(p.date)}
-                            />
-                        </div>
-                    )}
-                <hr/>
-                <i>Посты</i>
-                {// eslint-disable-next-line
-                    postsContents.map(p =>
-                        <div key={p.id}>
-                            <Preview
-                                text={p.content}
-                                title={p.title}
-                                date={new Date(p.date)}
-                            />
-                        </div>
-                    )
-                }
-            </div>;
-
-        return (
-            <Router>
-                {mainList}
-            </Router>
-        )
-    }
-}
 
 /*
  <Link to={`/posts/${p.id}`}>
@@ -76,7 +19,7 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            postsContents: []
+            posts: []
         };
     }
 
@@ -91,10 +34,10 @@ class App extends Component {
         fetch(url)
             .then(response => response.json())
             .then(obj => {
-                    let postsContents = [];
+                    let newPosts = [];
                     // eslint-disable-next-line
                     obj.map(o => {
-                        postsContents.push({
+                        newPosts.push({
                             title: o.title.rendered,
                             content: o.content.rendered,
                             date: o.date_gmt,
@@ -102,17 +45,12 @@ class App extends Component {
                             postType
                         })
                     });
+                    console.log('Received posts!');
                     console.log(obj);
-                    if(postType==='page'){
-                        this.setState({
-                            pagesContents: [...postsContents]
-                        });
-                    }
-                    if(postType==='post'){
-                        this.setState({
-                            postsContents: [...postsContents]
-                        });
-                    }
+                    // добавляем новый элемент в массив стейта
+                    this.setState({
+                        posts: this.state.posts.concat(newPosts)
+                    });
                 }
             );
     }
@@ -122,9 +60,10 @@ class App extends Component {
     }
 
     render() {
-        const allPosts = this.state.postsContents.concat(this.state.pagesContents);
-        const { postsContents=[], pagesContents=[] } = this.state;
+        const { posts=[] } = this.state;
+
         console.log('render!');
+
         return (
             <Router>
                 <div className="container-full">
@@ -141,59 +80,100 @@ class App extends Component {
                         <div className="col-sm-1">
                         </div>
                         <div className="col-sm-7">
+
+                            <Route path="/posts/:postId"
+                                   render={
+                                       m => {
+                                           return <Post postData={posts.find(p => p.id === +m.match.params.postId)}/>
+                                       }
+                                   }
+                            />
+
                             <Route exact={true}
-                                   path="/r"
+                                   path="/rrm"
                                    render={() =>
-                                       <Home posts={this.state}/>
+                                       <Home posts={
+                                           posts.map(p => ({
+                                               ...p,
+                                               title: <Link to={`/posts/${p.id}`}>{p.title}</Link>
+                                           }))
+                                       }/>
                                    }/>
 
                             <Route exact={true}
                                    path="/"
                                    render={() =>
-                                       <Home posts={this.state}/>
+                                       <Home posts={
+                                           posts.map(p => ({
+                                                   ...p,
+                                                   title: <Link to={`/posts/${p.id}`}>{p.title}</Link>
+                                           }))
+                                       }/>
                                    }/>
 
-                            <Route path="/posts/:postId"
-                                   render={m => {
-                                       console.log('m = ', m);
-                                       return <Post postData={allPosts.find(p => p.id === +m.match.params.postId)}/>
-                                   }
-                                   }
-                            />
                         </div>
 
                         <div className="col-sm-3">
-                            <div><div className="left-menu-title">Страницы</div>
-                                {// eslint-disable-next-line
-                                    pagesContents.map(p =>
-                                        <div key={p.id} className="post-link">
-                                            <Link to={`/posts/${p.id}`}>
-                                                {p.title}
-                                            </Link>
-                                        </div>
-                                    )
-                                }
-                            </div>
+
+                            <LeftMenuBlock
+                                menuData={{blockTitle:"Страницы", blockType:"page",
+                                    posts: posts.map(p => ({
+                                        ...p,
+                                        title: <Link to={`/posts/${p.id}`}>{p.title}</Link>
+                                    }))
+                                }} />
 
                             <hr/>
 
-                            <div><div className="left-menu-title">Посты</div>
-                                {// eslint-disable-next-line
-                                    postsContents.map(p =>
-                                        <div key={p.id} className="post-link">
-                                            <Link to={`/posts/${p.id}`}>
-                                                {p.title}
-                                            </Link>
-                                        </div>
-                                    )
-                                }
-                            </div>
+                            <LeftMenuBlock
+                                menuData={{blockTitle:"Посты", blockType:"post",
+                                    posts: posts.map(p => ({
+                                        ...p,
+                                        title: <Link to={`/posts/${p.id}`}>{p.title}</Link>
+                                    }))
+                                }} />
+
                         </div>
                     </div>
                 </div>
             </Router>
         );
   }
+}
+
+/*
+
+
+
+ <div>
+ <div className="left-menu-title">Посты</div>
+ {// eslint-disable-next-line
+ posts.filter(p => p.postType=="post").map(p =>
+ <div key={p.id} className="post-link">
+ <Link to={`/posts/${p.id}`}>
+ {p.title}
+ </Link>
+ </div>
+ )
+ }
+ </div>
+
+ */
+
+const LeftMenuBlock = ({menuData}) => {
+    const { blockTitle, blockType, posts } = menuData;
+    console.log('LeftMenuBlock!');
+    const output = <div>
+        <div className="left-menu-title">{blockTitle}</div>
+        {// eslint-disable-next-line
+            posts.filter(p => p.postType==blockType).map(p =>
+                <div key={p.id} className="post-link">
+                    {p.title}
+                </div>
+            )
+        }
+    </div>;
+    return output;
 }
 
 export default App;

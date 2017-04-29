@@ -1,6 +1,3 @@
-/**
- * Created by des on 19.04.2017.
- */
 import React, { Component } from 'react';
 
 class Preview extends Component {

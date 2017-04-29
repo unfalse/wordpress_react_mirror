@@ -3,19 +3,6 @@
     src: url('fonts/Alice-Regular.ttf') format('truetype');
 }
 
-body {
-    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#feffff+0,ddf1f9+68,a0d8ef+100 */
-    background: #feffff; /* Old browsers */
-    background: -moz-linear-gradient(left,  #feffff 0%, #ddf1f9 68%, #a0d8ef 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(left,  #feffff 0%,#ddf1f9 68%,#a0d8ef 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to right,  #feffff 0%,#ddf1f9 68%,#a0d8ef 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff', endColorstr='#a0d8ef',GradientType=1 ); /* IE6-9 */
-}
-
-.site-title {
-    background-color: #ccecff;
-}
-
 .container {
     margin-right: auto;
     margin-left: auto;
@@ -38,8 +25,6 @@ p {
 
 .post-link {
     font-size: 20pt;
-    background-color: rgba(203, 243, 198, 0.72);
-    border-bottom: solid blue 1px;
     padding-left: 30px;
 }
 
