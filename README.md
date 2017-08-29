@@ -1,4 +1,4 @@
-Wordpress mirror with REST API and React
+Wordpress viewer with REST API and React
 
 You can see it in action [here](http://unfalsecoding.net/rrm)
 
