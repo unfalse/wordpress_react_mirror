@@ -10,10 +10,11 @@
     "react-bootstrap": "^0.30.9",
     "react-dom": "^15.5.3",
     "react-router": "^4.1.1",
-    "react-router-dom": "^4.1.1"
+    "react-router-dom": "^4.1.1",
+    "react-scripts": "0.9.x"
   },
   "devDependencies": {
-    "react-scripts": "0.9.5"
+    "create-react-app": "^1.4.0"
   },
   "scripts": {
     "start": "react-scripts start",
