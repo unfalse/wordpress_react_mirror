@@ -18,8 +18,8 @@ getPagesAndPosts()
         <App posts={posts}>
           <Switch>
             <Route exact path="/"
-              render={() => <Home posts={ posts.map(p => ({...p, title:
-                              <Link to={`/posts/${p.id}`}>{p.title}</Link>}) ) } /> }
+              render={() =>
+                <Home posts={ posts.map(p => ({...p, title: <Link to={`/posts/${p.id}`}>{p.title}</Link>}) ) } /> }
             />
             <Route exact path="/rrm"
               render={() => <Home posts={ posts.map(p => ({...p, title: 
