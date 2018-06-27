@@ -16,7 +16,11 @@ const Home = ({posts}) =>
         {// eslint-disable-next-line
             posts && posts.filter(p => p.postType=="post").map(p =>
                 <div key={p.id}>
-                    <Preview text={p.content} title={p.title} date={new Date(p.date)} />
+                    <Preview
+                        text={p.content}
+                        title={p.title}
+                        date={new Date(p.date)}
+                    />
                 </div>
         )}
     </div>;

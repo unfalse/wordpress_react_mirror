@@ -5,7 +5,7 @@ import LeftMenuBlock from './../components/LeftMenuBlock';
 
 import './../styles/App.css';
 
-const App = (props) => {
+const App = props => {
     const { posts=[] } = props;
     return (
         <div className="container-full">
