@@ -31,3 +31,13 @@ p {
 .left-menu-title {
     font-size: 22pt;
 }
+
+.status-error {
+    font-size: 12px;
+    color: red;
+}
+
+.status-ok {
+    font-size: 12px;
+    color: green;
+}
