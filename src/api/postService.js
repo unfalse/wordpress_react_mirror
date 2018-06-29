@@ -13,15 +13,30 @@ const getPosts = (url, postType) =>
                             postType
                         })
                     });
-                    return newPosts;
+                    return {
+                        posts: newPosts,
+                        status: 200
+                    };
                 }
-            );
+            )
+            .catch(() => ({
+                posts: [],
+                status: 500
+            }));
 
-const getPagesAndPosts = () =>
+const getPagesAndPosts = (url) =>
          Promise.all([
-            getPosts('http://unfalsecoding.net/wp-json/wp/v2/pages', 'page'),
-            getPosts('http://unfalsecoding.net/wp-json/wp/v2/posts', 'post')
+            getPosts(url + '/wp-json/wp/v2/pages', 'page'),
+            getPosts(url + '/wp-json/wp/v2/posts', 'post')
         ])
-        .then(pagesAndPosts => [ ...pagesAndPosts[0], ...pagesAndPosts[1] ]);
+        .then(data => {
+            // debugger;
+            const status = data[0].status === 200 && data[1].status === 200 ? 'OK' : 'ERROR';
+            return {
+                url,
+                status,
+                posts: [ ...data[0].posts, ...data[1].posts ]
+            };
+        });
 
 export default getPagesAndPosts;
