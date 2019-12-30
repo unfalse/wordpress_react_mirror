@@ -19,8 +19,8 @@ const getPosts = (url, postType) =>
 
 const getPagesAndPosts = () =>
          Promise.all([
-            getPosts('http://unfalsecoding.net/wp-json/wp/v2/pages', 'page'),
-            getPosts('http://unfalsecoding.net/wp-json/wp/v2/posts', 'post')
+            getPosts('https://unfalsecoding.net/wp-json/wp/v2/pages', 'page'),
+            getPosts('https://unfalsecoding.net/wp-json/wp/v2/posts', 'post')
         ])
         .then(pagesAndPosts => [ ...pagesAndPosts[0], ...pagesAndPosts[1] ]);
 
