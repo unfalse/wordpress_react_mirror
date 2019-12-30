@@ -4,8 +4,8 @@
   "private": true,
   "homepage": "http://unfalsecoding.net/rrm",
   "dependencies": {
-    "bootstrap": "^3.4.0",
-    "jquery": "^3.3.1",
+    "bootstrap": "^3.4.1",
+    "jquery": "^3.4.1",
     "react": "^16.8.1",
     "react-bootstrap": "^0.31.5",
     "react-dom": "^16.8.1",
