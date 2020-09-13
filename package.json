@@ -5,7 +5,7 @@
   "homepage": "http://unfalsecoding.net/rrm",
   "dependencies": {
     "bootstrap": "^3.4.1",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.1",
     "react": "^16.8.1",
     "react-bootstrap": "^0.31.5",
     "react-dom": "^16.8.1",
@@ -17,7 +17,7 @@
     "enzyme": "^3.8.0",
     "enzyme-adapter-react-16": "^1.9.1",
     "enzyme-to-json": "^3.3.5",
-    "react-scripts": "3.4.1"
+    "react-scripts": "^3.4.3"
   },
   "scripts": {
     "start": "react-scripts start",
